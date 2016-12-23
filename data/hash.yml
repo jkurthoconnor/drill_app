@@ -1,0 +1,15 @@
+- create a new empty hash with a default value not set to `nil`
+- get value(s) of specified key(s)
+- get the key for a given value
+- add key/value pair
+- print out all keys
+- print out all values
+- print out all key/value pairs
+- print out all key/value pairs where value meets certain conditions
+- return the max / min key / value. Bonus- return the max / min n pairs / keys / values
+- return new hash of pairs meeting certain criteria
+- delete all key / value pairs where value meets certain conditions
+- combine two hashes into one
+- change the value stored under a given key
+- from an array of strings, create a hash of all elements meeting a given description (e.g., contain `is`, or are longer than 6 chars).  Make the indices the keys and the elements the values.
+- manually iterate though a hash and print each value or key

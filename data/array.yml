@@ -1,0 +1,26 @@
+- create a new array with n elements, each with a default value of v (where v is an immutable object)
+- swap the places of two elements in an array using one line; then reassign a slice of the array to new values. Bonus- swap places / reassign 'manually'.
+- iterate through the array and print successive 'chunks' of n consecutive elements. Next, print only the 2nd element in each chunk.\nBonus- do so manually. no chunk may contain less than n elements.",
+- slice the array into groups of n elements and print each slice.\nBonus- do so manually. [Final slice will contain < n elements if (ele.size % n != 0)]
+- iterate over array of numbers and print out each value; do the same in reverse.\nBonus- solve with iterators and then with manual loop)
+- iterate over array of numbers and print out only those matching certain conditions
+- append `n` to end of array\nBonus- append `n`, `o`, `p` to end of array with one line
+- prepend `n` to beginning of array\nBonus- prepend `n`, `o`, `p` to start of array with one line
+- remove specified objects from an array\nBonus- remove objects that meet given conditions
+- remove objects from an array at specified indices.\nBonus- remove objects from an array using a range of indices
+- remove duplicates from an array using one method\nBonus- remove duplicates by looping through the array, i.e. without invoking the presumptive method
+- extract all elements meeting given conditions (e.g. odds/evens, match a regex pattern) from an array into new array.\nBonus- do so by writing an original method that takes a block
+- increment all numbers in an array by 1
+- find sum of all numbers in an array
+- find the product of all numbers in an array
+- find max / min value in an array.\nBonus- find the max / min n elements in array
+- return the index of specified element (first occurance)
+- return the index of the first object that matches a given block
+- return number of times a given element occurs within the array\nBonus- return number of elements in array fitting a given description (e.g. are odd)
+- move element in array to new index using one line
+- combine two arrays into one 1) and return a new array, 2) by mutating original array.\nBonus- subtract the elements of one component array from the combined array to return an original.
+- return all indices of occurrences of a specified element
+- remove the first element in an array\nBonus- remove the first n elements in an array
+- remove the last element in an array\nBonus- remove the last n elements in an array
+- return the first element in an array\nBonus- return the first n elements in an array
+- return the last element in an array\nBonus- return the last n elements in an array
