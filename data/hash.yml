@@ -1,3 +1,4 @@
+---
 - create a new empty hash with a default value not set to `nil`
 - get value(s) of specified key(s)
 - get the key for a given value

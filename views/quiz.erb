@@ -1,13 +1,17 @@
-
-<p id="drill"><%= @drill %></p>
+<ul id="drill">
+<% divide_into_steps(@drill).each do |part| %>
+ <li><%= part %></li>
+<% end %>
+</ul>
 <footer>
   <div class="menu">
-    <p><a href="/question/<%= params[:type] %>">Next</a>
-    <p>Change Category:
+    <p><a href="/question/<%= params[:type] %>">New <%= params[:type] %> drill.</a></p>
+    <p>Other topics:
       <% list_other_categories(@file_paths).each do |other_type| %>
         <a href="/question/<%= other_type %>"><%= other_type %></a>
       <% end %>
     </p>
-    <a href="/">Return to Index</a>
+    <a href="/">Index</a>
   </div>  
 </footer>
+
