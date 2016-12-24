@@ -1,11 +1,13 @@
 
 <p id="drill"><%= @drill %></p>
-<div class="menu">
-  <p><a href="/question/<%= params[:type] %>">Next</a>
-  <p>Change Category:
-    <% list_other_categories(@file_paths).each do |other_type| %>
-      <a href="/question/<%= other_type %>"><%= other_type %></a>
-    <% end %>
-  </p>
-  <a href="/">Return to Index</a>
-</div>
+<footer>
+  <div class="menu">
+    <p><a href="/question/<%= params[:type] %>">Next</a>
+    <p>Change Category:
+      <% list_other_categories(@file_paths).each do |other_type| %>
+        <a href="/question/<%= other_type %>"><%= other_type %></a>
+      <% end %>
+    </p>
+    <a href="/">Return to Index</a>
+  </div>  
+</footer>

@@ -61,3 +61,5 @@ end
     # - allow adding new questions
     
 # improve index page (or remove it?)
+
+# move quiz.erb footer to layout; will need to modify list_others...
