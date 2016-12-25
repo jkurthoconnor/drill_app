@@ -1,16 +1,20 @@
 ---
-- create a new empty hash with a default value not set to `nil`
-- get value(s) of specified key(s)
-- get the key for a given value
-- add key/value pair
-- print out all keys
-- print out all values
-- print out all key/value pairs
-- print out all key/value pairs where value meets certain conditions
-- return the max / min key / value. Bonus- return the max / min n pairs / keys / values
-- return new hash of pairs meeting certain criteria
-- delete all key / value pairs where value meets certain conditions
-- combine two hashes into one
-- change the value stored under a given key
-- from an array of strings, create a hash of all elements meeting a given description (e.g., contain `is`, or are longer than 6 chars).  Make the indices the keys and the elements the values.
-- manually iterate though a hash and print each value or key
+- Create a new empty hash with a default value not set to `nil`.
+- 1) Return the value of a specified key.  2) Return the values of multiple specified keys.
+- Return the key for a given value.
+- Add a key/value pair.
+- Print out all keys.
+- Print out all values.
+- Print out all key/value pairs.
+- Print out all key/value pairs where value meets certain conditions.
+- 1) Return the max / min key / value.  2) Return the max / min n pairs, keys or values.
+- Return new hash of pairs meeting certain criteria.
+- Delete all key / value pairs where value meets certain conditions.
+- 1) Combine two hashes into a new one.  2)  Combine two hashes by mutating the caller.
+- Change the value stored under a given key.
+- From an array of strings, create a hash of all elements meeting a given description (e.g., contain `is`, or are longer than 6 chars).  Make the indices the keys and the elements the values.
+- Manually iterate though a hash and print each value or key.
+- Return a key / value pair (if any) that is associated with a given key.
+- 1) For a given block, do any, all, or no pairs match?  2) Write a method that takes blocks, returns a boolean in response to the previous questions.
+- Delete the key / value pair at a given key.
+- 1) Return true / false if a given key is present.  2) Return true / false if a given value is present.
