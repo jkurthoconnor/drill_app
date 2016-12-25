@@ -1,5 +1,13 @@
-<% @file_paths.each do |path| %>
-<ul>
-  <li><a href="/question/<%= isolate_name(path) %>"><%= isolate_name(path) %></a></li>
-</ul>
-<% end %>
+<div class="text_block" id="intro">
+  <p>Welcome to Ruby Fluency Drills.</p>
+  <p>Select an option below.</p>
+</div>
+<footer>
+  <div class="menu">
+    <p>
+    <% @file_paths.each do |path| %>
+      <a href="/question/<%= isolate_name(path) %>"><%= isolate_name(path) %></a>
+    <% end %>
+    </p>
+  </div>
+</footer>

@@ -11,10 +11,30 @@ header, footer {
   color: grey;
 }
 
-#drill { 
+.text_block { 
   font-style: italic;
   background: grey;
   border: .1em solid black;
-  padding: 5%; 
+  width: 75%;
+  padding: 4%;
+  margin: 0 auto;
   list-style-type: none;
+  }
+
+#intro {
+  text-align: center;
+  }
+  
+li {
+  padding: 2%;
+  }
+
+a {
+  font-size: .75em;
+  background: grey;
+  color: black;
+  padding: 1%;
+  text-decoration: none;
+  border: .1em solid black;
+  border-radius: 15px;
   }

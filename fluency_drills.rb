@@ -14,7 +14,6 @@ helpers do
   end
   
   def list_other_categories(paths)
-    # binding.pry
     others = paths.reject { |type| type.include?(params[:type] || '') }
     others.map { |type| isolate_name(type) }
   end
@@ -49,21 +48,14 @@ end
 
 
 # styling
-  # add title header to layout, banner style
-  # throughout use buttons (actual form buttons || links styled as buttons)
-  # use a separator to demarkate lines / subquestions in yaml files;
-  #    - introduce some formatting/parsing to style
+  # update hash, range, sting files with a separator to demarkate subquestions;
+  #    - introduce some formatting/parsing to style << get rid of bullets!!
   # 
 # Requirements
 # 
 # question page
-#   - user is given options: 
-#     - rank question difficulty
+#   - user is given options to rank question difficulty
 #    
 # add an edit page
     # - allow editing of questions
     # - allow adding new questions
-    
-# improve index page (or remove it?)
-
-# move quiz.erb footer to layout; will need to modify list_others...
