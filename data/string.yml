@@ -1,23 +1,22 @@
 ---
-- remove leading and trailing whitespace from a string
-- return a portion of a string based on index or indices.
-- return length of string. Bonus-return number of alphabetic characters (not spaces, punctuation) in string
-- return number of specified characters in string. Bonus-return number of specified characters without invoking `.count`
-- return number of specified sub-strings ( or words) in string
-- delete specified characters in string
-- delete characters at specified indices in string
-- return index of specified characters [may use regexp] in a string (first occurrance). Bonus- return index of specified characters (next occurrence) by starting at given index  Double bonus- return index of next occurance of character without providing integer for start from index
-- return index of specified characters [may use regexp] (last occurrence);. Bonus- return index of specified characters (last occurrence) up to a given index as stop point. Double bonus- return index of next-to-last occurrence of character without providing integer for stop-at index
-- add specified characters to start of string. Bonus- do so n times using one line
-- add specified characters to end of string. Bonus- do so n times using one line
-- add / insert specified characters at specified indices in string
-- insert specified word prior to (or after) given existing word (use one line)
-- substitute given character(s) [may use regexp] for other(s) in a string
-- reverse character order in string. Bonus- reverse without invoking `.reverse`. Double bonus- reverse order by iterating through string (i.e. without making the original string into an array)
-- determine if given characters are present in string. use both regex and non-regex methods
-- return array of characters matching a pattern [may use regexp]
-- return an array of words taken from a string that meet given conditions
-- return new string (or modify existing string) to have all characters lowercased
-- return new string (or modify existing string) to have all characters uppercased
-- return new string (or modify existing string) to have sentence case'
-- return a given string minus all punctuation and special characters. Bonus- return an array of words in the string, minus all punctuation and special characters.
+- 1) Return a new string with leading and trailing whitespace removed.  2) Remove leading and trailing whitespace from a string.  3) Perform previous tasks on only leading or only trailing whitespace.
+- Return a portion of a string based on index or indices.
+- 1) Return length of string.  2) Return number of alphabetic characters (not spaces, punctution, digits) in string.
+- 1) Return number of specified characters in string.  2) Return number of specified characters without invoking `.count`.
+- Return number of specified sub-strings (or words) in string.
+- 1) Return a new string with specified characters removed.  2) Delete specified characters from a string.
+- Delete characters at specified indices in string.
+- 1) Return index of specified characters [may use regexp] in a string (first occurrance).  2) Return index of specified characters (next occurrence) by starting at given index.  3) Return index of next occurance of character without providing integer for start-from index.
+- 1) Return index of specified characters [may use regexp] (last occurrence).  2) Return index of specified characters (last occurrence) up to a given index as stop point. 3) Return index of next-to-last occurrence of character without providing integer for stop-at index
+- 1) Add specified characters to start (or end) of string.  2) Do so n times using one line.
+- Add / insert specified characters at specified indices in string.
+- Insert specified word prior to (or after) given existing word (use one line).
+- 1) Return a new string with given character(s) substituted for originals [may use regexp].  2) Do the previous task but mutatue the caller.
+- 1) Reverse character order in string.  2) Reverse without invoking the eponymous method.  3) Reverse order by iterating through string (i.e. without making the original string into an array).
+- Determine if given characters are present in string. Use both regex and non-regex methods.
+- Return array of characters matching a pattern [may use regexp].
+- Return an array of words taken from a string that meet given conditions.
+- Return new string (or modify existing string) to have all characters lowercased.
+- Return new string (or modify existing string) to have all characters uppercased.
+- Return new string (or modify existing string) to have sentence case.
+- 1) Return a given string minus all punctuation and special characters.  2) Return an array of words in the string, minus all punctuation and special characters.

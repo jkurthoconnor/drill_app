@@ -1,16 +1,15 @@
 ---
-- Iterate though an inclusive range to print all capital / lowercase letters in the alphabet
-- Iterate though an exclusive range to print all integers from 1 to 50
-- Return the object that defines the beginning of a range
-- Return the object that defines the end of a range
-- Return the object with the maximum value in a range; return the n objects with maximum values in the range
-- Return the object with the minimum value in a range; return the n objects with minimum values in the range
-- Return an array containing each member of a range
-- Return the number of members in a numeric range
-- Iterate through a range and print every 2nd / 3rd / 4th member
-- Iterate through a range and print only those that meet a given condition (e.g. are odd, are capital letters)
-- Return an array of the last n members of a range
-- Return an array of the first n members of a range
-- Determine if an object is a member of a range
-- Determine if an object is between the start and stopping points of a range
-- Create an array of elements from the range that meet given conditions
+- Iterate though an inclusive range to print all capital or lowercase letters in the alphabet.
+- Iterate though an exclusive range to print all integers from 1 to 50.
+- 1) Return the object that defines the beginning of a range.  2) Return the object that defines the end of a range.
+- 1) Return the object with the maximum value in a range.  2) Return the n objects with maximum values in the range.
+- 1) Return the object with the minimum value in a range.  2) Return the n objects with minimum values in the range.
+- 1) Return an array containing each member of a range.  2) Return an array containing every other member of a range.
+- Return the number of members in a numeric range.
+- Iterate through a range and print every 2nd / 3rd / 4th member.
+- Iterate through a range and print only those that meet a given condition (e.g. are odd, are capital letters).
+- Return an array of the last n members of a range.
+- Return an array of the first n members of a range.
+- Determine if an object is a member of a range.
+- Determine if an object is between the start and stopping points of a range.
+- Create an array of elements from the range that meet given conditions.
