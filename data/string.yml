@@ -1,5 +1,4 @@
 ---
-- 1) Return a new string with leading and trailing whitespace removed.  2) Remove leading and trailing whitespace from a string.  3) Perform previous tasks on only leading or only trailing whitespace.
 - Return a portion of a string based on index or indices.
 - 1) Return length of string.  2) Return number of alphabetic characters (not spaces, punctution, digits) in string.
 - 1) Return number of specified characters in string.  2) Return number of specified characters without invoking `.count`.
@@ -20,3 +19,6 @@
 - Return new string (or modify existing string) to have all characters uppercased.
 - Return new string (or modify existing string) to have sentence case.
 - 1) Return a given string minus all punctuation and special characters.  2) Return an array of words in the string, minus all punctuation and special characters.
+- 1) Return a new string with leading and trailing whitespace removed.  2) Remove leading and trailing whitespace from a string.  3) Perform previous tasks on only leading or only trailing whitespace.
+- 1) Return a new string with each consecutive runs of any character replaced by single instance of the character.  2) Return a new string with all consecutive runs of given characters replaced by a single instance of the character.  3) Do either of the previous tasks manually.
+
