@@ -23,7 +23,7 @@
 - 1) Return number of times a given element occurs within the array.  2) Return number of elements in array fitting a given description (e.g. are odd).
 - Move an element in array to new index using one line.
 - 1) Combine two arrays into a new array.  2) Combine two arrays by mutating original array.  3) Subtract the elements of one component array from the combined array to return an original.
-- 1) Return all indices of occurrences of a specified element.
+- Return all indices of occurrences of a specified element.
 - 1) Remove the first element in an array.  2) Remove the first n elements in an array.
 - 1) Remove the last element in an array.  2) Remove the last n elements in an array.
 - 1) Return the first element in an array.  2) Return the first n elements in an array.
