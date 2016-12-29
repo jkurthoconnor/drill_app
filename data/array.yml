@@ -1,4 +1,5 @@
 ---
+- Identify and return the first element that matches a block.
 - Create a new array with n elements, each with a default value of v (where v is an immutable object).
 - 1) Swap the places of two elements in an array using one line.  2) Reassign a slice of the array to new values.  3) Swap places and / or reassign 'manually'.
 - 1) Iterate through an array and print successive 'chunks' of n consecutive elements.  2) Print only the 2nd element in each chunk.  3) Do the previous tasks manually. (No chunk may contain less than n elements.)
