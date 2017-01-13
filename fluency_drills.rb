@@ -3,8 +3,6 @@ require 'sinatra/reloader'
 require 'tilt/erubis'
 require 'yaml'
 
-require 'pry'
-
 
 data_path = File.expand_path('../data', __FILE__)
 
