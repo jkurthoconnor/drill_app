@@ -10,12 +10,12 @@ helpers do
   def isolate_name(file_path)
     File.basename(file_path, '.*')
   end
-  
+
   def list_other_categories(paths)
     others = paths.reject { |type| type.include?(params[:type] || '') }
     others.map { |type| isolate_name(type) }
   end
-  
+
   def divide_into_steps(drills)
     drills.split(/\s{2}/)
   end
