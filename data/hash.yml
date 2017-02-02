@@ -10,7 +10,7 @@
 - 1) Return the max / min key / value.  2) Return the max / min n pairs, keys or values.
 - Return new hash of pairs meeting certain criteria.
 - Delete all key / value pairs where value meets certain conditions.
-- 1) Combine two hashes into a new one.  2)  Combine two hashes by mutating the caller.
+- 1) Combine two hashes into a new one.  2) Combine two hashes by mutating the caller.
 - Change the value stored under a given key.
 - From an array of strings, create a hash of all elements meeting a given description (e.g., contain `is`, or are longer than 6 chars).  Make the indices the keys and the elements the values.
 - Manually iterate though a hash and print each value or key.
