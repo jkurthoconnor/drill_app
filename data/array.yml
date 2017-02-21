@@ -2,9 +2,9 @@
 - Identify and return the first element that matches a block.
 - Create a new array with n elements, each with a default value of v (where v is an immutable object).
 - 1) Swap the places of two elements in an array using one line.  2) Reassign a slice of the array to new values.  3) Swap places and / or reassign 'manually'.
-- 1) Iterate through an array and print successive 'chunks' of n consecutive elements.  2) Print only the 2nd element in each chunk.  3) Do the previous tasks manually. (No chunk may contain less than n elements.)
-- 1) Slice an array into groups of n elements and print each slice.  2) Perform previous task manually. (Final slice will contain < n elements if array size is not evenly divisible by slice size.)
-- 1) Iterate over array of numbers and print out each value.  2) Perform the previous task in reverse.  3) Perform 1 and 2 with a different approach (i.e. with iterators or manual loops).
+- 1) Iterate through an array and print successive 'chunks' of n consecutive elements. (No chunk may contain less than n elements.)  2) Do the previous task manually.  3) Write a custom method that takes a block to do the previous task. 
+- 1) Slice an array into groups of n elements and print each slice. (Final slice may contain < n elements.)  2) Perform previous task manually.  3) Write a custom method that takes a block to do the previous task.
+- 1) Iterate over array of numbers and print out each value.  2) Perform the previous task in reverse.  3) Perform 1 and 2 with custom methods that take blocks.
 - Iterate over array of numbers and print out only those matching certain conditions.
 - 1) Append `n` to end of array.  2) Append `n`, `o`, `p` to end of array with one line.
 - 1) Prepend `n` to beginning of array.  2) Prepend `n`, `o`, `p` to start of array with one.
