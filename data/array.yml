@@ -2,10 +2,10 @@
 - Identify and return the first element that matches a block.
 - Create a new array with n elements, each with a default value of v (where v is an immutable object).
 - 1) Swap the places of two elements in an array using one line.  2) Reassign a slice of the array to new values.  3) Swap places and / or reassign 'manually'.
-- 1) Iterate through an array and print successive 'chunks' of n consecutive elements. (No chunk may contain less than n elements.)  2) Do the previous task manually.  3) Write a custom method that takes a block to do the previous task. 
-- 1) Slice an array into groups of n elements and print each slice. (Final slice may contain < n elements.)  2) Perform previous task manually.  3) Write a custom method that takes a block to do the previous task.
+- 1) Iterate through an array and print successive 'chunks' of n consecutive elements. (No chunk may contain less than n elements.)  2) Do the same manually.  3) Write a method that takes a block to do the same. 
+- 1) Slice an array into groups of n elements and print each slice. (Final slice may contain < n elements.)  2) Do the same manually.  3) Write a method that takes a block to do the same.
 - 1) Iterate over array of numbers and print out each value.  2) Perform the previous task in reverse.  3) Perform 1 and 2 with custom methods that take blocks.
-- Iterate over array of numbers and print out only those matching certain conditions.
+- 1) Iterate over array of numbers and print out only those matching certain conditions.  2) Do the same manually.  3) Write a method that takes a block to do the same.
 - 1) Append `n` to end of array.  2) Append `n`, `o`, `p` to end of array with one line.
 - 1) Prepend `n` to beginning of array.  2) Prepend `n`, `o`, `p` to start of array with one.
 - 1) Remove specified objects from an array.  2) Remove objects that meet given conditions.
@@ -13,15 +13,15 @@
 - 1) Remove objects from an array at specified indices.  2) Remove objects from an array using a range of indices.
 - 1) Return objects from an array at specified indices.  2) Return objects from an array using a range of indices.
 - 1) Remove duplicates from an array using one method.  2) Remove duplicates by looping through the array.
-- 1) Return a new array lacking duplicates.  2) Return a new array lacking duplicates by looping through the array.
+- 1) Return a new array lacking duplicates.  2) Accomplish same by looping through the array.
 - 1) Extract all elements meeting given conditions (e.g. odds/evens, match a regex pattern) from an array into new array.  2) Perform the previous task with an original method that takes a block.
 - Increment all numbers in an array by 1.
-- Find the sum of all numbers in an array.
-- Find the product of all numbers in an array.
+- 1) Find the sum of all numbers in an array.  2) Do the same manually.  3) Write a custom 'reduce' method that takes a block.
+- 1) Find the product of all numbers in an array.  2) Do the same manually.  3) Write a custom 'reduce' method that takes a block.
 - 1) Find the max / min value in an array.  2) Find the max / min n elements in array.
 - Return the index of specified element (first occurance).
 - Return the index of the first object that matches a given block.
-- 1) Return number of times a given element occurs within the array.  2) Return number of elements in array fitting a given description (e.g. are odd).
+- 1) Return number of times a given element occurs within the array.  2) Return number of elements in array fitting a given description (e.g. are odd).  3) Do the same with a custom method that takes a block.
 - Move an element in array to new index using one line.
 - 1) Combine two arrays into a new array.  2) Combine two arrays by mutating original array.  3) Subtract the elements of one component array from the combined array to return an original.
 - Return all indices of occurrences of a specified element.
