@@ -14,6 +14,7 @@
 - Change the value stored under a given key.
 - From an array of strings, create a hash of all elements meeting a given description (e.g., contain `is`, or are longer than 6 chars).  Make the indices the keys and the elements the values.
 - Manually iterate though a hash and print each value or key.
+- Iterate through a hash's values and print each key.
 - Return a key / value pair (if any) that is associated with a given key.
 - 1) For a given block, do any, all, or no pairs match?  2) Write a method that takes blocks, returns a boolean in response to the previous questions.
 - Delete the key / value pair at a given key.
