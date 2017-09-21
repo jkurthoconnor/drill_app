@@ -21,4 +21,5 @@
 - 1) Return a given string minus all punctuation and special characters.  2) Return an array of words in the string, minus all punctuation and special characters.
 - 1) Return a new string with leading and trailing whitespace removed.  2) Remove leading and trailing whitespace from a string.  3) Perform previous tasks on only leading or only trailing whitespace.
 - 1) Return a new string with each consecutive run of any character replaced by single instance of the character.  2) Return a new string with all consecutive runs of given characters replaced by a single instance of the character.  3) Do either of the previous tasks manually.
+- 1) Return the integer representing a given string character.  2) Return the binary representing the integer.  3) Convert the binary back into an integer and return the original string char.
 
