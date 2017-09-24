@@ -6,7 +6,7 @@
 - 1) Return a new string with specified characters removed.  2) Delete specified characters from a string.
 - Delete characters at specified indices in string.
 - 1) Return index of specified characters [may use regexp] in a string (first occurrence).  2) Return index of specified characters (next occurrence) by starting at given index.  3) Return index of next occurance of character without providing integer for start-from index.
-- 1) Return index of specified characters [may use regexp] (last occurrence).  2) Return index of specified characters (last occurrence) up to a given index as stop point. 3) Return index of next-to-last occurrence of character without providing integer for stop-at index
+- 1) Return index of specified characters [may use regexp] (last occurrence).  2) Return index of specified characters (last occurrence) up to a given index as stop point.  3) Return index of next-to-last occurrence of character without providing integer for stop-at index
 - 1) Add specified characters to start (or end) of string.  2) Do so n times using one line.
 - Add / insert specified characters at specified indices in string.
 - 1) Insert specified word prior to (or after) given existing word (use one line)  2) Do previous task using regex capturing.
