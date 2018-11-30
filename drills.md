@@ -148,10 +148,24 @@ str.index('i', str.index('i') + 1)
 
 ### (string) add specified characters to start of string; Bonus: do so n times using one line
 ```ruby
+# mutation
 str = 'Hey, it is Friday!'
 
 str.prepend('!!')
+
+# non-mutating reassignment
+str_2 = 'hello'
+str_2 = "!! #{str_2}"
 ```
+
+```javascript
+// Cf JavaScript: only reassignment will work; string primitives are immutable
+let str = 'hello world';
+
+str = "!! ${str} **";
+console.log(str);
+```
+
   - Bonus: do so n times using one line
 
 ```ruby
@@ -267,6 +281,12 @@ let rev = '';
 for (let i = string.length - 1; i >= 0; i--) {
     rev += string[i];
 }
+
+// or with arrow function
+let str = 'hello world';
+let revStr = '';
+
+str.split('').forEach(chr => revStr = `${chr}${revStr}`);
 ```
 
 ```ruby
@@ -275,7 +295,7 @@ str = 'This is The string, is it not?'
 
 index = 1
 while index < str.length
-  str.insert(0, str.slice!(index)
+  str_2.insert(0, str_2.slice!(index))
   index += 1
 end
 
@@ -303,9 +323,20 @@ str.include?('O')
 str.scan('O') # returns array of matched patterns
 
 # regex
-
 str=~(/[ao]/)
-str.match(/[ao]/)
+str.match(/[ao]/)  # return match object
+```
+
+```javascript
+const str = 'this is a sample string';
+const pattern = new RegExp(/is/);
+
+// with regexp:
+console.log(str.match(/is/g));  // returns array of matches, like Ruby string#scan
+console.log(str.search(pattern)); // 2
+console.log(pattern.test(str));   // true
+// without:
+console.log(str.includes('is'));                // true
 ```
 
 ### (string) return array of characters matching a pattern (may use regex)
@@ -319,6 +350,14 @@ str.chars.select { |char| char < 'l'}
 
 # or
 str.scan(/[aeiou]/)
+```
+```javascript
+const str = '    hello world   ';
+str.match(/[aeiou]/g);
+
+// or
+const str = '    hello world   ';
+const matches = str.split("").filter(chr => { return chr.match(/[aieou]/) });
 ```
 
 ### return an array of words taken from a string that meet given conditions (may use regex).
@@ -336,7 +375,18 @@ str.scan(/\b\w{2,4}\b/)
 string = 'This IS tHe tEST string'
 string.downcase
 
+# to mutate
 string.downcase!
+```
+
+```javascript
+const str = 'THIS IS A SAMPLE STRING';
+
+str.toLowerCase();
+// or
+const lowerIt = (string) => {
+  return string.split("").map( char => { return char.toLowerCase() }).join("")
+};
 ```
 
 ### (string) return new string (or modify existing string) to have all characters uppercased
@@ -449,7 +499,6 @@ str.squeeze
 str.squeeze(' ,')
 
 # 3
-
 squeezed = ''
 
 str.chars.each do |char|
@@ -457,9 +506,36 @@ str.chars.each do |char|
   squeezed << char
 end
 
-p squeezed
+# or 3 taking arguments for removal:
+def de_dupe(string, *to_remove)
+  result = ""
+
+  string.each_char do |char|
+    result << char unless (to_remove.include?(char) && result.end_with?(char))
+  end
+
+  result
+end
 ```
 
+Compare with JS:
+```javascript
+const str1= 'THISSSS IS AA!AA SAMPLE STRING';
+const str2 = "HeLLo, H*w GoEEs iiit?";
+
+const deDupe = (string, ...toRemove) => {
+  let holder = '';
+
+  for (let i = 0; i < string.length; i++) {
+    const char = string[i];
+    if (!(holder.endsWith(char) && toRemove.includes(char))) {
+      holder += char;
+    }
+  }
+
+  return holder;
+}
+```
 
 ### Return the integer that represents a given character; return the binary representation of that integer; return the integer equivalent of the binary and then return the original character
 
