@@ -607,6 +607,42 @@ while index + elements - 1 < array.length
   # p array[index + 1]   # <- substitute this line for previous line for second part of question
   index += 1
 end
+
+# without reliance on slicing magic, and yielding to a block
+def chunk(array, size)
+  idx = 0
+
+  while (idx + size - 1) < array.size do
+    slice = []
+    (idx...idx + size).each { |i| slice << array[i] }
+    yield(slice) if block_given?
+    idx += 1
+  end
+end
+
+chunk([1,2,3,4,5], 2) { |slice| p slice }
+chunk([1,2,3,4,5], 3) { |slice| p slice }
+chunk([1,2,3,4,5], 4) { |slice| p slice }
+```
+
+Compare with JS, which has first-class functions:
+```javascript
+const eachCons = (array, size, callback) => {
+  const offset = size - 1;
+
+  for (let i = 0; (i + offset) < array.length ; i++) {
+    let chunk = [];
+    for (let j = i; j <= (i + offset); j++) {
+      chunk.push(array[j]);
+    }
+    callback(chunk)
+  }
+};
+
+eachCons([1,2,3,4,5,6,7,8], 0, (arr) => console.log(arr));
+eachCons([1,2,3,4,5,6,7,8], 1, (arr) => console.log(arr));
+eachCons([1,2,3,4,5,6,7,8], 3, (arr) => console.log(arr));
+eachCons([1,2,3,4,5,6,7,8], 8, (arr) => console.log(arr));
 ```
 
 ### slice the array into groups of n elements and print each slice.  Bonus: do so manually. Final slice will contain < n elements if (elements.size % n != 0)
@@ -862,6 +898,35 @@ end
 arr = [1, 2, 67, 19]
 
 arr.inject { |sum, number| sum += number }
+
+# using a custom reduce method:
+def reduce(array, collector=0)
+  array.each { |n| collector = yield(n, collector)}
+  collector
+end
+
+arr = (1..100).to_a
+arr2 = (1..10).to_a
+arr3 = [1, 10, 20]
+
+reduce(arr)  { |n, coll| coll *= n }
+reduce(arr2, 100) { |n, coll| coll *= n }
+reduce(arr3, 5) { |n, coll| coll += n }
+```
+Contrast with JS:
+
+```javascript
+const reduce = (array, callback, collector=0) => {
+  array.forEach( (ele) => {
+    collector = callback(ele, collector);
+  });
+
+  return collector;
+};
+
+reduce([1,2,3,4,5,6,7,8], (e, c) => {return (e + c)});
+reduce([1,2,3,4,5,6,7,8], (e, c) => {return (e * c)});
+reduce([1,2,3,4,5,6,7,8], (e, c) => {return (e + c)}, 100);
 ```
 
 ### find the product of all numbers in an array
