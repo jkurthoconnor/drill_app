@@ -579,8 +579,25 @@ mv1 = array.delete_at(1)
 
 array.insert(1, mv2)
 array.insert(5, mv1)
+
+# or with a method:
+def swap(arr, idx1, idx2)
+  holder = arr[idx1]
+  arr[idx1] = arr[idx2]
+  arr[idx2] = holder
+
+  arr
+end
 ```
 
+Compare with JS: (decomposition/assignment syntax requires enclosing `[]`
+```javascript
+const swap = (array, idx1, idx2) => {
+  [array[idx1], array[idx2]] = [array[idx2], array[idx1]];
+
+  return array
+};
+```
 
 ### create a new array with n elements, each with a default value of v (any immutable object)
 
@@ -957,7 +974,6 @@ arr.max
 arr.min
 arr.sort[-1]
 arr.sort[0]
-
 ```
 
 ### (array) find index of a specified element
@@ -972,10 +988,10 @@ droids.index('C3PO')
 droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
 
 droids.index { |droid| droid.include?('C') }
-
 ```
 
 ###  (array) return number of times an element occurs within the array; Bonus: return the number of  elements fitting a given description (e.g. are > n)
+
 ```ruby
 arr = [1, 3, 67, 34, 1001, 3, 2]
 
@@ -988,9 +1004,36 @@ arr.each { |number| total += 1 if number == 3 }
 total
 
 # Bonus:
-
 arr.count { |n| n.odd? }
 
+# custom method with block
+def count_instances(arr)
+  count = 0
+
+  arr.each do |ele|
+    count += 1 if yield(ele)
+  end
+
+  count
+end
+
+count_instances(array) { |e| e > 5 }
+count_instances(array) { |e| e.eql?(4)}
+```
+
+Compare with JS:
+
+```javascript
+const countInstances = (arr, target) => {
+  return arr.filter( (ele) => ele === target ).length;
+};
+
+// or with a callback
+const countInstances = (arr, callback) => {
+  return arr.filter((ele) => callback(ele)).length;
+};
+
+countInstances(array, (ele => { return ele < 5 }));
 
 ```
 
