@@ -990,7 +990,7 @@ droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
 droids.index { |droid| droid.include?('C') }
 ```
 
-###  (array) return number of times an element occurs within the array; Bonus: return the number of  elements fitting a given description (e.g. are > n)
+###  (array) Return number of times an element occurs within the array; Bonus: return the number of  elements fitting a given description (e.g. are > n)
 
 ```ruby
 arr = [1, 3, 67, 34, 1001, 3, 2]
@@ -998,12 +998,6 @@ arr = [1, 3, 67, 34, 1001, 3, 2]
 arr.count(3)
 
 # or 
-
-total = 0
-arr.each { |number| total += 1 if number == 3 }
-total
-
-# Bonus:
 arr.count { |n| n.odd? }
 
 # custom method with block
@@ -1024,17 +1018,17 @@ count_instances(array) { |e| e.eql?(4)}
 Compare with JS:
 
 ```javascript
+// hard-coding the criterion
 const countInstances = (arr, target) => {
   return arr.filter( (ele) => ele === target ).length;
 };
 
-// or with a callback
+// or with a callback to set criterion
 const countInstances = (arr, callback) => {
   return arr.filter((ele) => callback(ele)).length;
 };
 
 countInstances(array, (ele => { return ele < 5 }));
-
 ```
 
 ### (array) move element in array to new index using one line
@@ -1047,9 +1041,13 @@ arr.push arr.delete_at(4)
 arr.push(arr.shift)
 
 # to control point of insertion
-
 arr.insert(1, arr.delete_at(4))
-
+```
+Cf with JS:
+```javascript
+let arr = [1,2,3,4,5]
+arr.splice(3,2,...arr.slice(4), ...arr.slice(3,2)); 
+// arr is [1,2,3,5,4]
 ```
 
 ### (array) return all indices of occurrences of a specified element
@@ -1083,11 +1081,31 @@ p indices
 flintstones = ["Fred", "Barney", "Wilma", "Betty", "BamBam", "Pebbles"]
 addition = [ "Dino", "Other_Pet" ]
 
-flintstones + addition
+flintstones + addition       # non-mutating
 
-flintstones.concat(addition)
+[*array1, *array2]           # non-mutating: spreads contents of both arrays
+                             # into a new array
 
-flintstones - addition
+flintstones.concat(addition) # mutating
+
+flintstones - addition       # non-mutating
+```
+Compare with JS:
+```javascript
+let array = [1,2,3,4,5,6,7,8,3,3];
+let array2 = ['a','b','c','d','e'];
+
+let newArr = [...array, ...array2]; // non-mutating
+typeof (array + array2);            // STRING!!! NB: unlike Ruby, `+` coerces arrays 
+                                    // into string concatenation
+
+array.push(...array2);  // mutates by adding 'spread out' elements from array2
+
+// no subtraction method, but a custom approximation:
+const removeElements = (original, toSubtract) => {
+  return original.filter((ele) => !toSubtract.includes(ele));
+};
+// ^^ this will remove all occurrences of `toSubtract`'s elements from `original`
 ```
 
 ### remove the first element in an array\nBonus: remove the first n elements in an array
