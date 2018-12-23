@@ -1,4 +1,4 @@
- Ruby fluency drills
+Ruby fluency drills
 Practice until these patterns and their explanations are second nature
 
 ## Basic Data Manipulation
@@ -561,6 +561,13 @@ arr = [1, 2, 3, 4, 5]
 arr.find { |n| n > 3 }
 ```
 
+Compare with JS:
+
+```javascript
+let arr = [1,2,3,4,5];
+
+arr.find( (ele) => ele > 3);
+```
 
 ### swap the places of two characters in an array using one line. reassign a slice of the array to new values. Bonus: swap places / reassign 'manually'.
 
@@ -640,9 +647,26 @@ end
 chunk([1,2,3,4,5], 2) { |slice| p slice }
 chunk([1,2,3,4,5], 3) { |slice| p slice }
 chunk([1,2,3,4,5], 4) { |slice| p slice }
+
+# with explicit block call required:
+def each_cons(arr, chunk, &block)
+  idx = 0
+
+  while (idx + chunk) <= arr.size
+    block.call(arr[idx...(idx + chunk)] )
+    idx += 1
+  end
+end
+
+array = [1,2,3,4,5,6,7,8,9,10]
+each_cons(array, 2) { |slice| p slice }
+each_cons(array, 3) { |slice| p slice }
+each_cons(array, 4) { |slice| p slice }
+each_cons(array, 10) { |slice| p slice }
 ```
 
 Compare with JS, which has first-class functions:
+
 ```javascript
 const eachCons = (array, size, callback) => {
   const offset = size - 1;
@@ -825,18 +849,27 @@ arr.each do |ele|
   arr.delete_at(arr.rindex(ele)) if arr.count(ele) > 1
 end
 
-# non-destructive
+# non-destructive, O(N) Time, O(N) Space
+def my_uniq(array)
+  seen = {}
 
-arr = [1, 2, 3, 1, 2, 4, 1, 4, 6, 3 ]
-arr_uniq = []
-
-arr.each do |n|
-  arr_uniq.push(n) if !arr_uniq.include?(n) # or `unless arr_uniq.include?(n)
+  array.select do |ele|
+    !seen[ele] && (seen[ele] = true)
+  end
 end
-
-p arr_uniq
 ```
 
+Compare with JS non-destructive, O(N) Time, O(N) Space:
+```javascript
+const myUniq = (arr) => {
+  const seen = {};
+  return arr.filter( (ele) => {
+    if (seen[ele] === undefined) {
+      return seen[ele] = ele;
+    }
+  });
+};
+```
 
 ### (array) extract all odds (or evens, or match regex) into new array; Bonus: do so by writing an original method that takes a block
 
@@ -988,6 +1021,17 @@ droids.index('C3PO')
 droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
 
 droids.index { |droid| droid.include?('C') }
+
+# also:
+droids.find_index { |droid| droid.include?('C') }
+```
+
+Cf with Javascript:
+
+```javascript
+let droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data'];
+
+droids.findIndex( (droid) => droid.startsWith('C') );
 ```
 
 ###  (array) Return number of times an element occurs within the array; Bonus: return the number of  elements fitting a given description (e.g. are > n)
@@ -1013,6 +1057,16 @@ end
 
 count_instances(array) { |e| e > 5 }
 count_instances(array) { |e| e.eql?(4)}
+
+# or if the block is necessary:
+def my_count(arr, &block)
+  count = 0
+  arr.each do |n|
+    count += 1 if block.call(n)
+  end
+
+  count
+end
 ```
 
 Compare with JS:
@@ -1112,9 +1166,22 @@ const removeElements = (original, toSubtract) => {
 
 ```ruby
 arr = [1, 2, 3, 4, 5, 6]
-arr.shift
+arr.shift # 1
 # bonus
-arr.shift(3)
+arr.shift(3) # [2,3,4]
+```
+
+Cf with JavaScript: `shift` does not take arguments, but `splice` can be used instead
+
+```javascript
+let arr = [1,2,3,4,5,6,7];
+let n = 2;
+
+arr.shift();  // 1
+arr;          // [2,3,4,5,6,7]
+
+arr.splice(0, n); // [2,3]
+arr;              // [4,5,6,7]
 
 ```
 ### remove the last element in an array\nBonus: remove the last n elements in an array
@@ -1129,6 +1196,25 @@ arr.slice!(-3, 3)
 3.times {arr.delete_at(-1)}
 ```
 
+Cf with JavaScript: JS `pop` does not take arguments, but `splice` can be used instead
+
+```javascript
+let arr = [1,2,3,4,5,6,7];
+let n = 3;
+
+arr.pop(); //  7
+arr;        // [1,2,3,4,5,6]
+
+arr.splice(arr.length - n); // [4,5,6]
+arr;        // [1,2,3]
+
+// non-desctructive
+let arr = [1,2,3,4,5,6,7];
+let n = 3;
+
+arr.slice(0, arr.length - n); // [1,2,3,4]
+arr;                          // [1,2,3,4,5,6,7]
+```
 ### return the first element in an array\nBonus: return the first n elements in an array
 
 ```ruby
