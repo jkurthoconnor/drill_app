@@ -38,12 +38,19 @@ end
 get '/question/:type' do
   file = params[:type] + '.yml'
   file_path = File.join(data_path, file)
-  question_set = YAML.load_file(file_path)
-  @drill = question_set[rand(question_set.size)]
 
-  erb :quiz
+  if @file_paths.include?(file_path)
+    question_set = YAML.load_file(file_path)
+    @drill = question_set[rand(question_set.size)]
+    erb :quiz
+  else
+    erb :index
+  end
 end
 
+not_found do
+  erb :index
+end
 
 # styling
   # update hash, range, sting files with a separator to demarkate subquestions;
