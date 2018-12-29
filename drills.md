@@ -807,18 +807,21 @@ arr.keep_if { |n| n < 3 }
 
 ```ruby
 arr = [1, 2, 3, 4, 5]
-
 arr.delete_at(-1)
 
 # or
-
 arr.slice!(-1)
 
 # Bonus
-
 arr.slice!(1..3)
 ```
 
+Cf with JavaScript:
+```javascript
+let arr = [1,2,3,4];
+arr.splice(0, 1); // returns [1] and removes the element 1 (arr mutated)
+                  // second arg is the count of items to remove
+```
 
 ### (array) remove duplicates using one method; bonus: do so without invoking the presumptive method
 
@@ -871,7 +874,7 @@ const myUniq = (arr) => {
 };
 ```
 
-### (array) extract all odds (or evens, or match regex) into new array; Bonus: do so by writing an original method that takes a block
+### (array) extract all elements meeting given conditions into new array; Bonus: do so by writing an original method that takes a block
 
 ```ruby
 arr = [1, 2, 3, 4, 5, 5, 2, 1]
@@ -905,6 +908,41 @@ def filter(arr)
 end
 
 p filter(array) { |num| num > 2 }
+
+# or with required / explicit block call:
+def filter(arr, &block)
+  result = []
+
+  arr.each do |ele|
+    if block.call(ele)
+      result << ele
+    end
+  end
+  result
+end
+
+p filter([1,2,3]) { |e| e.even? }
+p filter([1,2,3]) { |e| e.odd? }
+p filter(['a', 'b', 'c', 'd']) { |e| e < 'b' }
+```
+
+Cf with JavaScript:
+```javascript
+//`Array.prototype.filter` plays the same role as Ruby's `select`;
+// Custom implementation below:
+
+const myFilter = (arr, callback) => {
+  const result = [];
+
+  for (let ele of arr) {
+    if (callback(ele)) result.push(ele);
+  }
+
+  return result;
+};
+
+let array = [1,2,2,2,2,3,4,5,6,7,7,7,8,3,3];
+let evens = myFilter(array, (e) => e % 2 === 0);
 ```
 
 
@@ -1011,9 +1049,22 @@ arr.sort[0]
 
 ### (array) find index of a specified element
 ```ruby
-droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
+droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'C3PO', 'Data']
 
 droids.index('C3PO')
+# to return the index of the last element match:
+droids.rindex('C3PO')
+```
+
+Cf with JavaScript:
+
+```javascript
+
+let driods = ['R2D2', 'C3PO', 'BB8', 'K9', 'C3PO', 'Data'];
+
+droids.indexOf('C3PO');
+// to return the index of the last element match:
+droids.lastIndexOf('C3PO');
 ```
 
 ### (array) find the index of the first element that matches a given block
@@ -1021,7 +1072,6 @@ droids.index('C3PO')
 droids = ['R2D2', 'C3PO', 'BB8', 'K9', 'Data']
 
 droids.index { |droid| droid.include?('C') }
-
 # also:
 droids.find_index { |droid| droid.include?('C') }
 ```
