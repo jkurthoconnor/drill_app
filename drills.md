@@ -362,12 +362,20 @@ const matches = str.split("").filter(chr => { return chr.match(/[aieou]/) });
 
 ### return an array of words taken from a string that meet given conditions (may use regex).
 ```ruby
-str = 'Oh, what beautiful weather today!'
-
+str = "Oh, what beautiful weather today!"
 str.split.select {|word| word.length <= 6 }
 
 #or 
-str.scan(/\b\w{2,4}\b/)
+str.scan(/\b\w{1,6}\b/)
+```
+Compare with Js:
+
+```javascript
+let str = 'Oh, what beautiful weather today!'
+str.split(/ /).filter( w => w.length <= 6);
+
+// or
+str.match(/\b\w{1,6}\b/g);
 ```
 
 ### (string) return new string (or modify existing string) to have all characters lowercased
@@ -382,11 +390,10 @@ string.downcase!
 ```javascript
 const str = 'THIS IS A SAMPLE STRING';
 
-str.toLowerCase();
+str = str.toLowerCase();
 // or
-const lowerIt = (string) => {
-  return string.split("").map( char => { return char.toLowerCase() }).join("")
-};
+
+str = str.replace(/[A-Z]/g, ltr => ltr.toLowerCase() );
 ```
 
 ### (string) return new string (or modify existing string) to have all characters uppercased
@@ -610,6 +617,17 @@ const swap = (array, idx1, idx2) => {
 
 ```ruby
 array = Array.new(4, true)
+```
+Cf with JavaScript:
+  - Array constructor takes a size arg, but no default value arg.
+
+```javascript
+// create new Array of given size:
+let arr = new Array(7); // [<7 empty items>]
+// create new Array from the empty but sized array:
+let arr2 = Array.from(arr); // [undefined, undefined, ...]
+// map to an immutable value
+let result = arr2.map( ele => 0); // [0,0,0,...]
 ```
 
 ### "iterate through the array and print successive 'chunks' of n consecutive elements. Next print only the 2nd element in each chunk. Bonus: do so manually. No chunk may contain less than n elements."
@@ -1037,7 +1055,7 @@ end
 p product
 ```
 
-### (array) find max / min value in array
+### (array) find max / min value in array; Bonus: find max/min n values
 ```ruby
 arr = [1, 3, 67, 34, 1001, 3, 2]
 
@@ -1045,6 +1063,24 @@ arr.max
 arr.min
 arr.sort[-1]
 arr.sort[0]
+
+# Bonus:
+arr.max(2)
+arr.min(2)
+```
+Cf with JavaScript:
+```javascript
+let arr = [1,2,5,6,4,2];
+// max:
+arr.sort( (a,b) => a - b)[arr.length - 1];
+// min:
+arr.sort( (a,b) => a - b)[0];
+
+// Bonus:
+// max 2:
+arr.sort( (a,b) => a - b).slice(arr.length - 2);
+// min 2:
+arr.sort( (a,b) => a - b).slice(0, 2);
 ```
 
 ### (array) find index of a specified element
@@ -1299,6 +1335,19 @@ arr.last(3)
 arr[-3, 3]
 
 ```
+
+Compare with JS:
+
+```javascript
+let array = [1,2,3,4,5];
+
+array[array.length - 1];
+
+// bonus:
+array.slice(array.length - 2);  // [4,5]
+array.slice(array.length - 3);  // [3,4,5]
+```
+
 ### create a new empty hash with a non-nil default value.
 
 ```ruby
