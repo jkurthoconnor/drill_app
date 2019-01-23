@@ -79,6 +79,8 @@ p count
 ```ruby 
 str = 'So this is my string, is it?'
 
+# TARGETING WHOLE WORDS
+# `count` called on an array considers whole elements; it does not build a set of individual chars to match as with the string version
 str.split.count('is')
 
 # NB: to prevent potential problems with punctuation and to target only whole words
@@ -91,9 +93,23 @@ total = 0
 str.split.each { |word| total += 1 if word == 'is' }
 total
 
-# or
-str.scan('is').length # NB: this will return a count of an instance of 'is', even within other words
+# TARGETING SUBSTRINGS (i.e. contiguous characters of a pattern, not necessarily a word)
+str.scan('is').length 
 ```
+
+Cf with JavaScript
+
+```javascript
+let str = 'So this is my string, is it?';
+
+
+// TARGETING WHOLE WORDS
+str.match(/\bis\b/g).length; // 2 
+
+// TARGETING SUBSTRINGS
+str.match(/is/g).length;  // 3
+```
+
 
 ### (string) delete specified characters in string
 ```ruby
