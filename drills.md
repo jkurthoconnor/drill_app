@@ -147,6 +147,19 @@ def slice_str!(string, start, n)
 end
 ```
 
+Compare with JS:
+  
+  JS strings are primatives, so they are immutable; the best one can do is to reassign a new string reflecting the required deletions in the original string.
+
+
+```javascript
+let str = 'HellO, how aRe you?';
+
+// to remove char at idx 5:
+let str = `${str.slice(0,5)}${str.slice(6)}`;  // 'HellO how aRe you?'
+
+```
+
 ### (string) return index of specified characters (first occurrence); bonus: return index of specified characters (first occurrence) starting at given index; double bonus: return index of second occurrence of character using one line of code
 ```ruby
 str = 'This is my string.'
@@ -167,7 +180,7 @@ str.index('i', str.index('i') + 1)
 # mutation
 str = 'Hey, it is Friday!'
 
-str.prepend('!!')
+str.prepend('!!')  # "!!Hey, it is Friday!"
 
 # non-mutating reassignment
 str_2 = 'hello'
@@ -178,7 +191,7 @@ str_2 = "!! #{str_2}"
 // Cf JavaScript: only reassignment will work; string primitives are immutable
 let str = 'hello world';
 
-str = "!! ${str} **";
+str = `!! ${str} **`;
 console.log(str);
 ```
 
