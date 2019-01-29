@@ -1010,7 +1010,7 @@ end
 ```
 
 
-### (array) find sum of all numbers
+### (array) find sum of all numbers; Bonus: create a method to do so taking a block
 ```ruby
 arr = [1, 2, 3, 4, 5]
 
@@ -1035,22 +1035,25 @@ arr = [1, 2, 67, 19]
 arr.inject { |sum, number| sum += number }
 
 # using a custom reduce method:
-def reduce(array, collector=0)
-  array.each { |n| collector = yield(n, collector)}
-  collector
+class Array
+  def reducer(initial=0, &block)
+    total = initial
+    self.each do |n|
+      total = block.call(total,n)
+    end
+
+    total
+  end
 end
 
-arr = (1..100).to_a
-arr2 = (1..10).to_a
-arr3 = [1, 10, 20]
-
-reduce(arr)  { |n, coll| coll *= n }
-reduce(arr2, 100) { |n, coll| coll *= n }
-reduce(arr3, 5) { |n, coll| coll += n }
+numbers = [1,2,3,4,5]
+numbers.reducer { |memo, num| memo + num }
 ```
+
 Contrast with JS:
 
 ```javascript
+// using the built-in
 const reduce = (array, callback, collector=0) => {
   array.forEach( (ele) => {
     collector = callback(ele, collector);
