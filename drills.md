@@ -1054,6 +1054,11 @@ Contrast with JS:
 
 ```javascript
 // using the built-in
+let arr = [1,2,3,4,5]
+
+arr.reduce((memo, n) => memo + n)
+
+// using a custom method
 const reduce = (array, callback, collector=0) => {
   array.forEach( (ele) => {
     collector = callback(ele, collector);
