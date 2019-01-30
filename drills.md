@@ -934,18 +934,15 @@ arr.each do |number|
 end
 
 # or
-
 new_arr = arr.select { |number| number.even? }
 
 # or
-
 arr = ['apples', 'pears', 'bananas', 'plantains']
 arr.select { |fruit| fruit.match(/pl/) }
 
 # Bonus
 
 array = [1, 2, 3, 4, 5]
-
 def filter(arr)
   filtered = []
   arr.each do |n|
@@ -956,21 +953,22 @@ end
 
 p filter(array) { |num| num > 2 }
 
-# or with required / explicit block call:
-def filter(arr, &block)
-  result = []
+# as an Array method with explicit block call:
+class Array
+  def selector(&block)
+    results = []
 
-  arr.each do |ele|
-    if block.call(ele)
-      result << ele
+    self.each do |ele|
+      results << ele if block.call(ele)
     end
+
+    results
   end
-  result
 end
 
-p filter([1,2,3]) { |e| e.even? }
-p filter([1,2,3]) { |e| e.odd? }
-p filter(['a', 'b', 'c', 'd']) { |e| e < 'b' }
+n2 = (1..100).to_a
+p n2.selector { |n| n.odd? }
+p n2.selector { |n| n.even? }
 ```
 
 Cf with JavaScript:
@@ -990,6 +988,21 @@ const myFilter = (arr, callback) => {
 
 let array = [1,2,2,2,2,3,4,5,6,7,7,7,8,3,3];
 let evens = myFilter(array, (e) => e % 2 === 0);
+
+// or as an addition to Array methods
+Array.prototype.selector = function(callback) {
+  let results = [];
+  for (ele of this) {
+    if ( callback(ele)) results.push(ele);
+  }
+
+  return results;
+};
+
+let numbers = [1,2,3,4,5,6,7];
+let getOdds = (n) => (n % 2 !== 0);
+
+console.log(numbers.selector(getOdds));
 ```
 
 
@@ -1206,6 +1219,22 @@ const countInstances = (arr, callback) => {
 };
 
 countInstances(array, (ele => { return ele < 5 }));
+
+// or as an addition to `Array.prototype`
+Array.prototype.counter = function(callback) {
+  let count = 0;
+
+  for (ele of this) {
+    if (callback(ele)) (count += 1); 
+  }
+  
+  return count;
+};
+
+let numbers = [1,2,3,4,5,6,7];
+let countOdds = (n) => (n % 2 === 1);
+
+console.log(numbers.counter(countOdds));
 ```
 
 ### (array) move element in array to new index using one line
