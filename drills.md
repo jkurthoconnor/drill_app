@@ -1257,6 +1257,7 @@ console.log(numbers.counter(countOdds));
 ```
 
 ### (array) move element in array to new index using one line
+
 ```ruby
 arr = [1, 3, 67, 34, 1001, 3, 2]
 
@@ -1268,11 +1269,13 @@ arr.push(arr.shift)
 # to control point of insertion
 arr.insert(1, arr.delete_at(4))
 ```
+
 Cf with JS:
+
 ```javascript
-let arr = [1,2,3,4,5]
-arr.splice(3,2,...arr.slice(4), ...arr.slice(3,2)); 
-// arr is [1,2,3,5,4]
+let arr = [2,4,3,1,2,3]
+arr.splice(1,0, ...arr.splice(2,1));
+// arr is [2,3,4,1,2,3]
 ```
 
 ### (array) return all indices of occurrences of a specified element
