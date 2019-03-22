@@ -1117,7 +1117,26 @@ arr.sort[0]
 # Bonus:
 arr.max(2)
 arr.min(2)
+
+# homegrown with monkey patching:
+class Array
+  def max_val(n=1)
+    values = self.clone
+    max_queue = []
+
+    while !values.empty? do
+      value = values.pop
+
+      while !max_queue.empty? && (max_queue.last > value) do
+        values.push(max_queue.pop)
+      end
+
+        max_queue.push(value)
+    end
+  end
+end
 ```
+
 Cf with JavaScript:
 ```javascript
 let arr = [1,2,5,6,4,2];
