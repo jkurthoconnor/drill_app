@@ -556,6 +556,10 @@ end
 
 Compare with JS:
 ```javascript
+const str = 'hello, there, howww, arrre you?'
+str.replace(/(.)\1+/g, '$1');
+
+// or
 const str1= 'THISSSS IS AA!AA SAMPLE STRING';
 const str2 = "HeLLo, H*w GoEEs iiit?";
 
@@ -657,6 +661,12 @@ let arr = new Array(7); // [<7 empty items>]
 let arr2 = Array.from(arr); // [undefined, undefined, ...]
 // map to an immutable value
 let result = arr2.map( ele => 0); // [0,0,0,...]
+
+// another approach:
+let arr = new Array(7);
+let shallowCopy = Array.from(arr); // [undefined, undefined...]
+// or the equivalent result:
+let shallowCopy2 = [ ...arr ]; // [undefined, undefined...]
 ```
 
 ### "iterate through the array and print successive 'chunks' of n consecutive elements. Next print only the 2nd element in each chunk. Bonus: do so manually. No chunk may contain less than n elements."
@@ -846,7 +856,21 @@ arr.delete_at(-1)
 arr = [1, 2, 3, 4, 5]
 arr.delete_if {|n| n > 4 }
 arr.keep_if { |n| n < 3 }
+```
 
+Cf with JavaScript:
+
+If a built-in mutating method is required, JS doesn't have a perfect match, but desired elements can be removed one at a time with `splice` and `indexOf`
+
+```javascript
+let arr = [1,2,3,4,4,5,10,100];
+arr.splice(arr.indexOf(3), 1); // [3]
+```
+
+Assuming reassignment is allowed, `filter` will work to remove elements _that do not meet_ a given description; i.e. to keep those that do meet a description
+
+```javascript
+arr = arr.filter( ele => ele > 9 ); // [10, 100]
 ```
 
 
@@ -1083,6 +1107,19 @@ const reduce = (array, callback, collector=0) => {
 reduce([1,2,3,4,5,6,7,8], (e, c) => {return (e + c)});
 reduce([1,2,3,4,5,6,7,8], (e, c) => {return (e * c)});
 reduce([1,2,3,4,5,6,7,8], (e, c) => {return (e + c)}, 100);
+
+
+// or with monkey patching:
+Array.prototype.reduceIt = function(callback, accumulator = 0) {
+  this.forEach( ele => { accumulator = callback(accumulator, ele) })
+
+  return accumulator;
+};
+
+let numbers = [1,2,3,4,5,6,7,12,19];
+let add = (acc, n) => (acc + n);
+
+numbers.reduceIt(add);
 ```
 
 ### find the product of all numbers in an array
@@ -1268,6 +1305,9 @@ arr.push(arr.shift)
 
 # to control point of insertion
 arr.insert(1, arr.delete_at(4))
+
+# if idx of target is not known:
+arr.insert(1, arr.delete_at(arr.find_index(3)))
 ```
 
 Cf with JS:
@@ -1276,6 +1316,8 @@ Cf with JS:
 let arr = [2,4,3,1,2,3]
 arr.splice(1,0, ...arr.splice(2,1));
 // arr is [2,3,4,1,2,3]
+// or if idx of target is not known:
+arr.splice(1,0, ...arr.splice(arr.indexOf(3),1));
 ```
 
 ### (array) return all indices of occurrences of a specified element
