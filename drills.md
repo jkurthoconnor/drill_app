@@ -556,6 +556,10 @@ end
 
 Compare with JS:
 ```javascript
+const str = 'hello, there, howww, arrre you?'
+str.replace(/(.)\1+/g, '$1');
+
+// or
 const str1= 'THISSSS IS AA!AA SAMPLE STRING';
 const str2 = "HeLLo, H*w GoEEs iiit?";
 
@@ -664,6 +668,12 @@ let result = arr2.map( ele => 0); // [0,0,0,...]
 
 // Bonus:
 let arr3 = Array.of(1,19, 'this is a test'); // [1, 19, 'this is a test']
+
+// another approach:
+let arr = new Array(7);
+let shallowCopy = Array.from(arr); // [undefined, undefined...]
+// or the equivalent result:
+let shallowCopy2 = [ ...arr ]; // [undefined, undefined...]
 ```
 
 ### "iterate through the array and print successive 'chunks' of n consecutive elements. Next print only the 2nd element in each chunk. Bonus: do so manually. No chunk may contain less than n elements."
@@ -853,7 +863,21 @@ arr.delete_at(-1)
 arr = [1, 2, 3, 4, 5]
 arr.delete_if {|n| n > 4 }
 arr.keep_if { |n| n < 3 }
+```
 
+Cf with JavaScript:
+
+If a built-in mutating method is required, JS doesn't have a perfect match, but desired elements can be removed one at a time with `splice` and `indexOf`
+
+```javascript
+let arr = [1,2,3,4,4,5,10,100];
+arr.splice(arr.indexOf(3), 1); // [3]
+```
+
+Assuming reassignment is allowed, `filter` will work to remove elements _that do not meet_ a given description; i.e. to keep those that do meet a description
+
+```javascript
+arr = arr.filter( ele => ele > 9 ); // [10, 100]
 ```
 
 
@@ -941,18 +965,15 @@ arr.each do |number|
 end
 
 # or
-
 new_arr = arr.select { |number| number.even? }
 
 # or
-
 arr = ['apples', 'pears', 'bananas', 'plantains']
 arr.select { |fruit| fruit.match(/pl/) }
 
 # Bonus
 
 array = [1, 2, 3, 4, 5]
-
 def filter(arr)
   filtered = []
   arr.each do |n|
@@ -963,21 +984,22 @@ end
 
 p filter(array) { |num| num > 2 }
 
-# or with required / explicit block call:
-def filter(arr, &block)
-  result = []
+# as an Array method with explicit block call:
+class Array
+  def selector(&block)
+    results = []
 
-  arr.each do |ele|
-    if block.call(ele)
-      result << ele
+    self.each do |ele|
+      results << ele if block.call(ele)
     end
+
+    results
   end
-  result
 end
 
-p filter([1,2,3]) { |e| e.even? }
-p filter([1,2,3]) { |e| e.odd? }
-p filter(['a', 'b', 'c', 'd']) { |e| e < 'b' }
+n2 = (1..100).to_a
+p n2.selector { |n| n.odd? }
+p n2.selector { |n| n.even? }
 ```
 
 Cf with JavaScript:
@@ -997,6 +1019,21 @@ const myFilter = (arr, callback) => {
 
 let array = [1,2,2,2,2,3,4,5,6,7,7,7,8,3,3];
 let evens = myFilter(array, (e) => e % 2 === 0);
+
+// or as an addition to Array methods
+Array.prototype.selector = function(callback) {
+  let results = [];
+  for (ele of this) {
+    if ( callback(ele)) results.push(ele);
+  }
+
+  return results;
+};
+
+let numbers = [1,2,3,4,5,6,7];
+let getOdds = (n) => (n % 2 !== 0);
+
+console.log(numbers.selector(getOdds));
 ```
 
 
@@ -1017,7 +1054,7 @@ end
 ```
 
 
-### (array) find sum of all numbers
+### (array) find sum of all numbers; Bonus: create a method to do so taking a block
 ```ruby
 arr = [1, 2, 3, 4, 5]
 
@@ -1042,22 +1079,30 @@ arr = [1, 2, 67, 19]
 arr.inject { |sum, number| sum += number }
 
 # using a custom reduce method:
-def reduce(array, collector=0)
-  array.each { |n| collector = yield(n, collector)}
-  collector
+class Array
+  def reducer(initial=0, &block)
+    total = initial
+    self.each do |n|
+      total = block.call(total,n)
+    end
+
+    total
+  end
 end
 
-arr = (1..100).to_a
-arr2 = (1..10).to_a
-arr3 = [1, 10, 20]
-
-reduce(arr)  { |n, coll| coll *= n }
-reduce(arr2, 100) { |n, coll| coll *= n }
-reduce(arr3, 5) { |n, coll| coll += n }
+numbers = [1,2,3,4,5]
+numbers.reducer { |memo, num| memo + num }
 ```
+
 Contrast with JS:
 
 ```javascript
+// using the built-in
+let arr = [1,2,3,4,5]
+
+arr.reduce((memo, n) => memo + n)
+
+// using a custom method
 const reduce = (array, callback, collector=0) => {
   array.forEach( (ele) => {
     collector = callback(ele, collector);
@@ -1069,6 +1114,19 @@ const reduce = (array, callback, collector=0) => {
 reduce([1,2,3,4,5,6,7,8], (e, c) => {return (e + c)});
 reduce([1,2,3,4,5,6,7,8], (e, c) => {return (e * c)});
 reduce([1,2,3,4,5,6,7,8], (e, c) => {return (e + c)}, 100);
+
+
+// or with monkey patching:
+Array.prototype.reduceIt = function(callback, accumulator = 0) {
+  this.forEach( ele => { accumulator = callback(accumulator, ele) })
+
+  return accumulator;
+};
+
+let numbers = [1,2,3,4,5,6,7,12,19];
+let add = (acc, n) => (acc + n);
+
+numbers.reduceIt(add);
 ```
 
 ### find the product of all numbers in an array
@@ -1103,7 +1161,26 @@ arr.sort[0]
 # Bonus:
 arr.max(2)
 arr.min(2)
+
+# homegrown with monkey patching:
+class Array
+  def max_val(n=1)
+    values = self.clone
+    max_queue = []
+
+    while !values.empty? do
+      value = values.pop
+
+      while !max_queue.empty? && (max_queue.last > value) do
+        values.push(max_queue.pop)
+      end
+
+        max_queue.push(value)
+    end
+  end
+end
 ```
+
 Cf with JavaScript:
 ```javascript
 let arr = [1,2,5,6,4,2];
@@ -1205,9 +1282,26 @@ const countInstances = (arr, callback) => {
 };
 
 countInstances(array, (ele => { return ele < 5 }));
+
+// or as an addition to `Array.prototype`
+Array.prototype.counter = function(callback) {
+  let count = 0;
+
+  for (ele of this) {
+    if (callback(ele)) (count += 1); 
+  }
+  
+  return count;
+};
+
+let numbers = [1,2,3,4,5,6,7];
+let countOdds = (n) => (n % 2 === 1);
+
+console.log(numbers.counter(countOdds));
 ```
 
 ### (array) move element in array to new index using one line
+
 ```ruby
 arr = [1, 3, 67, 34, 1001, 3, 2]
 
@@ -1218,12 +1312,19 @@ arr.push(arr.shift)
 
 # to control point of insertion
 arr.insert(1, arr.delete_at(4))
+
+# if idx of target is not known:
+arr.insert(1, arr.delete_at(arr.find_index(3)))
 ```
+
 Cf with JS:
+
 ```javascript
-let arr = [1,2,3,4,5]
-arr.splice(3,2,...arr.slice(4), ...arr.slice(3,2)); 
-// arr is [1,2,3,5,4]
+let arr = [2,4,3,1,2,3]
+arr.splice(1,0, ...arr.splice(2,1));
+// arr is [2,3,4,1,2,3]
+// or if idx of target is not known:
+arr.splice(1,0, ...arr.splice(arr.indexOf(3),1));
 ```
 
 ### (array) return all indices of occurrences of a specified element
