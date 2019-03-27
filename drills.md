@@ -642,11 +642,15 @@ const swap = (array, idx1, idx2) => {
 };
 ```
 
-### create a new array with n elements, each with a default value of v (any immutable object)
+### create a new array with n elements, each with a default value of v (any immutable object) Bonus: create a new array and fill it with any initial values
 
 ```ruby
 array = Array.new(4, true)
+
+# Bonus
+array2 = Array.new(4) { |idx| [ idx ] } # [ [0], [1], [2], [3] ]
 ```
+
 Cf with JavaScript:
   - Array constructor takes a size arg, but no default value arg.
 
@@ -657,6 +661,9 @@ let arr = new Array(7); // [<7 empty items>]
 let arr2 = Array.from(arr); // [undefined, undefined, ...]
 // map to an immutable value
 let result = arr2.map( ele => 0); // [0,0,0,...]
+
+// Bonus:
+let arr3 = Array.of(1,19, 'this is a test'); // [1, 19, 'this is a test']
 ```
 
 ### "iterate through the array and print successive 'chunks' of n consecutive elements. Next print only the 2nd element in each chunk. Bonus: do so manually. No chunk may contain less than n elements."
@@ -1242,8 +1249,20 @@ until index == arr.length
   index += 1
 end
 p indices
-
 ```
+
+Cf with JavaScript
+
+```javascript
+let indices = [];
+let arr = [2, 5, 3, 2, 7, 8, 2, 5]; 
+
+for (let idx in arr) {
+  if (arr[idx] === 5) indices.push(idx);
+}
+```
+
+
 ### combine two arrays into one:  1) and return a new array, 2) by mutating original array. Subtract the elements of one component array from the combined array to return an original.
 
 ```ruby
