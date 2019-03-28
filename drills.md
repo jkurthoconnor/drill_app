@@ -750,7 +750,7 @@ eachCons([1,2,3,4,5,6,7,8], 3, (arr) => console.log(arr));
 eachCons([1,2,3,4,5,6,7,8], 8, (arr) => console.log(arr));
 ```
 
-### slice the array into groups of n elements and print each slice.  Bonus: do so manually. Final slice will contain < n elements if (elements.size % n != 0)
+### slice the array into groups of n elements and print each slice.  The same element will not appear in multiple slices. Bonus: do so manually. Final slice will contain < n elements if (elements.size % n != 0)
 
 ```ruby 
 array = [1, 3, 4, 5, 7, 8, 9]
@@ -765,6 +765,24 @@ slice = 2
 while index < array.length
   p array[index, slice]
   index += slice
+end
+
+# with a custom Array method
+module CustomArray
+  def my_each_slice(size, &block)
+    start_slice_idx = 0
+    end_slice_idx = size - 1
+
+    while start_slice_idx < self.length
+      block.call(self[start_slice_idx..end_slice_idx])
+      start_slice_idx += size
+      end_slice_idx += size
+    end
+  end
+end
+
+class Array
+  include CustomArray
 end
 ```
 
