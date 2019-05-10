@@ -542,16 +542,30 @@ str.chars.each do |char|
   squeezed << char
 end
 
-# or 3 taking arguments for removal:
-def de_dupe(string, *to_remove)
-  result = ""
+# or 3) taking optional arguments for removal:
+module String_Mod
+  def tighten(chars = nil)
 
-  string.each_char do |char|
-    result << char unless (to_remove.include?(char) && result.end_with?(char))
+    result = ""
+
+    each_char do |ch|
+      if (chars && chars.include?(ch)) || !chars
+        result << ch unless result[-1] == ch
+      else
+        result << ch
+      end
+    end
+
+    result
   end
-
-  result
 end
+
+class String
+  include String_Mod
+end
+
+# or with regexp:
+str.gsub(/(.)\1+/, '\1')
 ```
 
 Compare with JS:
