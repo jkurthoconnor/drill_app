@@ -660,11 +660,15 @@ const swap = (array, idx1, idx2) => {
 };
 ```
 
-### create a new array with n elements, each with a default value of v (any immutable object)
+### create a new array with n elements, each with a default value of v (any immutable object) Bonus: create a new array and fill it with any initial values
 
 ```ruby
 array = Array.new(4, true)
+
+# Bonus
+array2 = Array.new(4) { |idx| [ idx ] } # [ [0], [1], [2], [3] ]
 ```
+
 Cf with JavaScript:
   - Array constructor takes a size arg, but no default value arg.
 
@@ -675,6 +679,9 @@ let arr = new Array(7); // [<7 empty items>]
 let arr2 = Array.from(arr); // [undefined, undefined, ...]
 // map to an immutable value
 let result = arr2.map( ele => 0); // [0,0,0,...]
+
+// Bonus:
+let arr3 = Array.of(1,19, 'this is a test'); // [1, 19, 'this is a test']
 
 // another approach:
 let arr = new Array(7);
@@ -757,7 +764,7 @@ eachCons([1,2,3,4,5,6,7,8], 3, (arr) => console.log(arr));
 eachCons([1,2,3,4,5,6,7,8], 8, (arr) => console.log(arr));
 ```
 
-### slice the array into groups of n elements and print each slice.  Bonus: do so manually. Final slice will contain < n elements if (elements.size % n != 0)
+### slice the array into groups of n elements and print each slice.  The same element will not appear in multiple slices. Bonus: do so manually. Final slice will contain < n elements if (elements.size % n != 0)
 
 ```ruby 
 array = [1, 3, 4, 5, 7, 8, 9]
@@ -772,6 +779,24 @@ slice = 2
 while index < array.length
   p array[index, slice]
   index += slice
+end
+
+# with a custom Array method
+module CustomArray
+  def my_each_slice(size, &block)
+    start_slice_idx = 0
+    end_slice_idx = size - 1
+
+    while start_slice_idx < self.length
+      block.call(self[start_slice_idx..end_slice_idx])
+      start_slice_idx += size
+      end_slice_idx += size
+    end
+  end
+end
+
+class Array
+  include CustomArray
 end
 ```
 
@@ -1357,8 +1382,20 @@ until index == arr.length
   index += 1
 end
 p indices
-
 ```
+
+Cf with JavaScript
+
+```javascript
+let indices = [];
+let arr = [2, 5, 3, 2, 7, 8, 2, 5]; 
+
+for (let idx in arr) {
+  if (arr[idx] === 5) indices.push(idx);
+}
+```
+
+
 ### combine two arrays into one:  1) and return a new array, 2) by mutating original array. Subtract the elements of one component array from the combined array to return an original.
 
 ```ruby
