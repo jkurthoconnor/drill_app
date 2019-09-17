@@ -115,7 +115,7 @@ str.match(/is/g).length;  // 3
 ```ruby
 str = 'This is my string.'
 
-str.delete('is') # NB: deletes 'i' and 's' in any occurrence 
+str.delete('is') # NB: returns new str w/o 'i' and 's'
 # or 
 str.delete!('is')
 # or 
@@ -132,6 +132,7 @@ str.slice!(1)
 str.slice!(1..4)
 
 # without convenience methods:
+# only deletes a contiguous sub-string
 
 def slice_str!(string, start, n)
   if (start + n > string.length - 1) || n < 0 || start < 0
@@ -149,7 +150,7 @@ end
 
 Compare with JS:
   
-  JS strings are primatives, so they are immutable; the best one can do is to reassign a new string reflecting the required deletions in the original string.
+  JS strings are primitives, so they are immutable; the best one can do is to reassign a new string reflecting the required deletions in the original string.
 
 
 ```javascript
@@ -251,7 +252,7 @@ str.insert(-2, 'aaa')
 
 let str = 'Hey, it is Friday!';
 
-str = str.split(0, 3) + 'eee' + str.split(3);
+str = str.slice(0, 3) + 'eee' + str.slice(3);
 ```
 
 
@@ -260,6 +261,12 @@ str = str.split(0, 3) + 'eee' + str.split(3);
 str = 'Hey, it is Friday!'
 
 str.insert(str.index('Fri'), 'not ')
+```
+
+Or, using regexp and a backreference:
+```ruby
+str = 'Hey, it is Friday!'
+str.sub(/(Friday)/, 'not \1')
 ```
 
 
@@ -704,13 +711,20 @@ array = [1, 3, 4, 5, 7, 8]
 index = 0
 elements = 3
 
-while index + elements - 1 < array.length
-  p array[index, elements] 
-  # p array[index + 1]   # <- substitute this line for previous line for second part of question
-  index += 1
+def chunk(arr, grouping)
+  arr.each_with_index do |n, idx|
+    chunk = []
+
+    grouping.times do |t|
+      chunk << arr[idx + t]
+    end
+
+    yield(chunk) if block_given?
+    break if idx + grouping >= arr.size
+  end
 end
 
-# without reliance on slicing magic, and yielding to a block
+# yielding to a block
 def chunk(array, size)
   idx = 0
 
@@ -1109,6 +1123,9 @@ end
 arr = [1, 2, 67, 19]
 
 arr.inject { |sum, number| sum += number }
+arr.reduce(:+)
+# or 
+arr.each_with_object({count: 0}) { |n, obj| obj[:count] += n }
 
 # using a custom reduce method:
 class Array
@@ -1210,6 +1227,7 @@ class Array
         max_queue.push(value)
     end
   end
+  # must return n max values from sorted `values`
 end
 ```
 
@@ -1280,7 +1298,9 @@ def count_instances(arr)
   count = 0
 
   arr.each do |ele|
-    count += 1 if yield(ele)
+    if block_given?
+      count += 1 if yield(ele)
+    end
   end
 
   count
